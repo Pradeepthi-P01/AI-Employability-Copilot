@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Briefcase, Check, AlertTriangle, ExternalLink, X } from 'lucide-react';
 
+const API_BASE = window.location.port === '5173' ? 'http://localhost:8000' : '';
+
 const JobBoard = ({ studentProfile, addLog }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,7 +14,7 @@ const JobBoard = ({ studentProfile, addLog }) => {
     setLoading(true);
     addLog(`[Job Matching Agent] Fetching jobs matching user's active profile...`);
     try {
-      const response = await fetch(`http://localhost:8000/api/jobs?student_id=${studentProfile.student_id}`);
+      const response = await fetch(`${API_BASE}/api/jobs?student_id=${studentProfile.student_id}`);
       if (!response.ok) {
         throw new Error("Failed to match jobs.");
       }

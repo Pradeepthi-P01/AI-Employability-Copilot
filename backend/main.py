@@ -1,5 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import json
 import logging
@@ -264,3 +266,27 @@ def get_matched_jobs(student_id: int):
     except Exception as e:
         logger.error(f"Failed to match jobs: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Job matching failed: {str(e)}")
+
+# Serve React static assets in production
+import os
+
+frontend_dist_path = os.path.join(os.path.dirname(__file__), "frontend", "dist")
+if not os.path.exists(frontend_dist_path):
+    # Try sibling path if running inside backend/ folder directly
+    frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+
+assets_path = os.path.join(frontend_dist_path, "assets")
+
+if os.path.exists(assets_path):
+    app.mount("/assets", StaticFiles(directory=assets_path), name="assets")
+
+@app.get("/{catchall:path}")
+async def serve_react_app(catchall: str):
+    # Avoid intercepting API routes
+    if catchall.startswith("api"):
+        raise HTTPException(status_code=404, detail="API endpoint not found.")
+        
+    index_file_path = os.path.join(frontend_dist_path, "index.html")
+    if os.path.exists(index_file_path):
+        return FileResponse(index_file_path)
+    return {"message": "Welcome to Employability Copilot API. Frontend build not found."}

@@ -19,6 +19,8 @@ import ParticleCanvas from './components/ParticleCanvas';
 
 import './App.css'; // Will be empty, but good to preserve imports
 
+const API_BASE = window.location.port === '5173' ? 'http://localhost:8000' : '';
+
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [studentProfile, setStudentProfile] = useState(null);
@@ -40,7 +42,7 @@ function App() {
     addLog(`[Gap Analyzer] Comparing current skills with standard benchmark profiles...`);
     
     try {
-      const response = await fetch("http://localhost:8000/api/analyze-gap", {
+      const response = await fetch(`${API_BASE}/api/analyze-gap`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

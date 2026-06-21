@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { MessageSquare, Play, Send, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
 
+const API_BASE = window.location.port === '5173' ? 'http://localhost:8000' : '';
+
 const MockInterview = ({ studentProfile, targetRole, addLog }) => {
   const [session, setSession] = useState(null); // { interview_id, questions }
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -19,7 +21,7 @@ const MockInterview = ({ studentProfile, targetRole, addLog }) => {
     addLog(`[Recruiter Agent] Compiling technical mock questions for ${targetRole}...`);
 
     try {
-      const response = await fetch("http://localhost:8000/api/interview/start", {
+      const response = await fetch(`${API_BASE}/api/interview/start`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -66,7 +68,7 @@ const MockInterview = ({ studentProfile, targetRole, addLog }) => {
     setMessages(prev => [...prev, { sender: 'student', text: textToSend }]);
     
     try {
-      const response = await fetch("http://localhost:8000/api/interview/submit-answer", {
+      const response = await fetch(`${API_BASE}/api/interview/submit-answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

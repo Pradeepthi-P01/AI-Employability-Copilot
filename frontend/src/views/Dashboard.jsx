@@ -3,6 +3,8 @@ import { Upload, CheckCircle, AlertTriangle } from 'lucide-react';
 import ScoreGauge from '../components/ScoreGauge';
 import RadarChart from '../components/RadarChart';
 
+const API_BASE = window.location.port === '5173' ? 'http://localhost:8000' : '';
+
 const Dashboard = ({ 
   studentProfile, 
   setStudentProfile, 
@@ -55,7 +57,7 @@ const Dashboard = ({
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch("http://localhost:8000/api/upload-resume", {
+      const response = await fetch(`${API_BASE}/api/upload-resume`, {
         method: "POST",
         body: formData,
       });
