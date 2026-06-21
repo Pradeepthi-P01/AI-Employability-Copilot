@@ -1,0 +1,19 @@
+# Environment variables
+.env
+backend/.env
+
+# Python caching
+__pycache__/
+backend/__pycache__/
+backend/agents/__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,32 @@
+JANE DEVELOPER
+Email: jane.dev@example.com | Phone: +1-234-567-8900 | GitHub: github.com/janedev
+
+SUMMARY
+Passionate Computer Science student with strong foundations in Python programming, SQL databases, and web technologies. Seeking an internship to build production-ready systems and learn modern cloud architectures.
+
+EDUCATION
+State University
+Bachelor of Science in Computer Science (GPA: 3.8/4.0)
+Graduation Date: May 2026
+
+TECHNICAL SKILLS
+- Programming Languages: Python, JavaScript, HTML, CSS
+- Databases: SQL, SQLite, PostgreSQL
+- Tools & Frameworks: Git, Pandas, NumPy, Flask
+- Methodologies: Software development life cycle, OOP
+
+EXPERIENCE
+Tech Innovations LLC
+Software Engineering Intern (June 2025 - August 2025)
+- Assisted in building server-side automation scripts using Python.
+- Optimized query latency by 15% on client SQL databases.
+- Collaborated in an agile team of 5 engineers to deliver frontend UI changes.
+
+PROJECTS
+Personal Portfolio Dashboard
+- Developed a web application using Flask, HTML5, and CSS grid to track personal tasks.
+- Integrated SQLite database to persist task histories.
+- Used Git for version control.
+
+CERTIFICATIONS
+- AWS Certified Cloud Practitioner (2025)
