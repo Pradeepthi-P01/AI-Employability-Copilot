@@ -2,6 +2,7 @@ import os
 
 # Gemini API Key Setup
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+key_source = "Environment Variable"
 
 if not GEMINI_API_KEY:
     try:
@@ -12,6 +13,7 @@ if not GEMINI_API_KEY:
                 for line in f:
                     if line.strip().startswith("GEMINI_API_KEY="):
                         GEMINI_API_KEY = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                        key_source = "backend/.env"
                         break
         # Check root/.env as fallback
         if not GEMINI_API_KEY:
@@ -21,9 +23,16 @@ if not GEMINI_API_KEY:
                     for line in f:
                         if line.strip().startswith("GEMINI_API_KEY="):
                             GEMINI_API_KEY = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                            key_source = "root .env"
                             break
     except Exception:
         pass
+
+if GEMINI_API_KEY:
+    print(f"INFO: Loaded GEMINI_API_KEY from {key_source} (starts with: '{GEMINI_API_KEY[:10]}...')")
+else:
+    print("WARNING: No GEMINI_API_KEY found in environment or .env files!")
+
 
 # Standard benchmark skills for target roles
 ROLE_BENCHMARKS = {
